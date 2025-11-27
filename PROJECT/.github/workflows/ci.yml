@@ -1,0 +1,210 @@
+# AT80 Continuous Integration Pipeline
+# 
+# Features:
+#   - Automated linting and formatting checks
+#   - Unit and integration test execution
+#   - Code coverage reporting (99% threshold)
+#   - Security scanning
+#   - WIP commit skip mechanism
+#
+# WIP Skip: Commits prefixed with [WIP] or starting with "wip:" 
+#           will skip the test stage but still run linting.
+
+name: CI Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:  # Allow manual trigger
+
+env:
+  PYTHON_VERSION: "3.11"
+  COVERAGE_THRESHOLD: 99
+
+jobs:
+  # ============================================================
+  # LINT JOB - Always runs (even on WIP commits)
+  # ============================================================
+  lint:
+    name: 🔍 Lint & Format Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+      
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+      
+      - name: 📦 Install linting tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff black mypy
+      
+      - name: 🎨 Check formatting with Black
+        run: |
+          black --check --diff .
+        continue-on-error: false
+      
+      - name: 🔍 Lint with Ruff
+        run: |
+          ruff check .
+        continue-on-error: false
+      
+      - name: 📝 Type check with MyPy
+        run: |
+          mypy --ignore-missing-imports features/ scripts/
+        continue-on-error: true  # Warning only for now
+
+  # ============================================================
+  # TEST JOB - Skipped on WIP commits
+  # ============================================================
+  test:
+    name: 🧪 Test Suite
+    runs-on: ubuntu-latest
+    needs: lint
+    
+    # Skip tests if commit message contains [WIP] or starts with wip:
+    if: |
+      !contains(github.event.head_commit.message, '[WIP]') && 
+      !startsWith(github.event.head_commit.message, 'wip:') &&
+      !startsWith(github.event.head_commit.message, 'wip(')
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+      
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+      
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov pytest-xdist
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+      
+      - name: 🧪 Run unit tests with coverage
+        run: |
+          pytest tests/ \
+            --cov=features \
+            --cov=scripts \
+            --cov-report=xml \
+            --cov-report=html \
+            --cov-report=term-missing \
+            --cov-fail-under=${{ env.COVERAGE_THRESHOLD }} \
+            -v \
+            --tb=short
+      
+      - name: 📊 Upload coverage report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: htmlcov/
+          retention-days: 14
+      
+      - name: 📈 Coverage Summary
+        if: always()
+        run: |
+          echo "## Coverage Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Coverage threshold: ${{ env.COVERAGE_THRESHOLD }}%" >> $GITHUB_STEP_SUMMARY
+
+  # ============================================================
+  # SECURITY JOB - Skipped on WIP commits
+  # ============================================================
+  security:
+    name: 🔒 Security Scan
+    runs-on: ubuntu-latest
+    needs: lint
+    
+    # Skip security scan on WIP commits
+    if: |
+      !contains(github.event.head_commit.message, '[WIP]') && 
+      !startsWith(github.event.head_commit.message, 'wip:') &&
+      !startsWith(github.event.head_commit.message, 'wip(')
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+      
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+      
+      - name: 📦 Install security tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install bandit safety
+      
+      - name: 🔒 Run Bandit security linter
+        run: |
+          bandit -r features/ scripts/ -ll -ii
+        continue-on-error: true  # Report but don't fail
+      
+      - name: 🛡️ Check dependencies for vulnerabilities
+        run: |
+          if [ -f requirements.txt ]; then
+            safety check -r requirements.txt --output text
+          fi
+        continue-on-error: true  # Report but don't fail
+
+  # ============================================================
+  # WIP NOTICE JOB - Only runs on WIP commits
+  # ============================================================
+  wip-notice:
+    name: ⚠️ WIP Commit Notice
+    runs-on: ubuntu-latest
+    
+    # Only run on WIP commits
+    if: |
+      contains(github.event.head_commit.message, '[WIP]') || 
+      startsWith(github.event.head_commit.message, 'wip:') ||
+      startsWith(github.event.head_commit.message, 'wip(')
+    
+    steps:
+      - name: 📝 WIP Notice
+        run: |
+          echo "## ⚠️ Work In Progress Commit" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "This commit is marked as **Work In Progress**." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Skipped checks:**" >> $GITHUB_STEP_SUMMARY
+          echo "- 🧪 Test Suite" >> $GITHUB_STEP_SUMMARY
+          echo "- 🔒 Security Scan" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Still running:**" >> $GITHUB_STEP_SUMMARY
+          echo "- 🔍 Lint & Format Check" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Remember to run full tests before marking as complete!" >> $GITHUB_STEP_SUMMARY
+
+  # ============================================================
+  # SUMMARY JOB - Always runs last
+  # ============================================================
+  summary:
+    name: 📋 Pipeline Summary
+    runs-on: ubuntu-latest
+    needs: [lint, test, security]
+    if: always()
+    
+    steps:
+      - name: 📋 Generate Summary
+        run: |
+          echo "## 🚀 CI Pipeline Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Job | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Lint | ${{ needs.lint.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Test | ${{ needs.test.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Security | ${{ needs.security.result }} |" >> $GITHUB_STEP_SUMMARY
