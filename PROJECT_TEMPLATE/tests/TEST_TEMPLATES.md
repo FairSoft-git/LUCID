@@ -1,6 +1,6 @@
 # Test Templates
 
-> **Project:** AT80  
+> **Project:** [Project Name]  
 > **Version:** 1.0  
 > **Last Updated:** 2025-11-27  
 > **Status:** Active

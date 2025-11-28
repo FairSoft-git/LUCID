@@ -1,24 +1,17 @@
-# AT80 .gitignore
-# Following project architecture: data and scripts are LOCAL ONLY
+# LUCID PROJECT .gitignore
+# Template project - all source files should be tracked
 
 # =============================================================================
-# DATA FILES - LOCAL ONLY (not pushed to repo)
+# DATA FILES - Local data files (not tracked)
 # =============================================================================
-data/
-*.json
-*.csv
-
-# Log files
+data/logs/
+data/output/
 *.log
-logs/
 
 # =============================================================================
-# DEVELOPMENT SCRIPTS - LOCAL ONLY
+# SCRIPTS - All scripts are tracked in template
 # =============================================================================
-scripts/
-!scripts/cli.py
-!scripts/spellcheck.py
-!scripts/README.md
+# (No exclusions - scripts/ is fully tracked)
 
 # =============================================================================
 # PYTHON ARTIFACTS

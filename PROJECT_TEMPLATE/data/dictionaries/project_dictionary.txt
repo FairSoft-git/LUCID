@@ -1,0 +1,73 @@
+# [PROJECT NAME] Project-Specific Dictionary
+# 
+# This is a TEMPLATE for creating project-specific dictionaries.
+# Copy this file and rename it to `project_dictionary.txt` in your project.
+#
+# ============================================
+# INSTRUCTIONS
+# ============================================
+# 1. Add words that are valid in YOUR project but not in a standard dictionary
+# 2. One word per line
+# 3. Lines starting with # are comments (ignored)
+# 4. Words are case-insensitive
+# 5. Keep organized by category for maintainability
+# 6. Avoid adding common English words (use generic_dictionary.txt for those)
+#
+# ============================================
+# WHAT TO ADD HERE
+# ============================================
+# - Project name and acronyms
+# - Domain-specific terminology
+# - Product/feature names
+# - API/service names your project uses
+# - Custom class/function names that appear in docs
+# - Industry jargon specific to your domain
+# - Names of people, places, or things in your domain
+#
+# ============================================
+# WHAT NOT TO ADD HERE
+# ============================================
+# - Common programming terms (already in generic_dictionary.txt)
+# - Standard English words (already in pyspellchecker)
+# - Typos you want to keep (fix the source instead)
+#
+
+# ============================================
+# PROJECT IDENTITY
+# ============================================
+# yourprojectname
+# youracronym
+
+# ============================================
+# DOMAIN TERMINOLOGY
+# ============================================
+# Add terms specific to your industry/domain
+
+# ============================================
+# PRODUCT/FEATURE NAMES
+# ============================================
+# Add product names, feature names, etc.
+
+# ============================================
+# EXTERNAL SERVICES & APIs
+# ============================================
+# Add names of third-party services you integrate with
+
+# ============================================
+# CUSTOM CLASS/FUNCTION NAMES
+# ============================================
+# Add names that appear in documentation
+
+# ============================================
+# PEOPLE & PLACES
+# ============================================
+# Add names relevant to your domain
+
+# ============================================
+# ABBREVIATIONS
+# ============================================
+# Add project-specific abbreviations
+
+# ============================================
+# ADD YOUR TERMS BELOW
+# ============================================

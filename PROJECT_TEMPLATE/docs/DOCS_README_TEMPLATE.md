@@ -13,7 +13,7 @@ This directory contains all project documentation.
 ## Contributing
 
 When adding new documentation:
-1. Use the templates in `LUCID/helpers/`.
+1. Use the templates in the project (e.g., `docs/`, `features/`, `tests/`, `scripts/`).
 2. Keep documents focused and concise (LUCID philosophy).
 3. Update the index below if adding a new top-level section.
 

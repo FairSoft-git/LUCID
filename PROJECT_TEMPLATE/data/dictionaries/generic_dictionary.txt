@@ -1,0 +1,302 @@
+# Generic Programming Dictionary
+# This file contains common programming terms, abbreviations, and technical vocabulary
+# that are valid across most software projects.
+#
+# Format: One word per line, lines starting with # are comments
+# Words are case-insensitive
+
+# Python keywords and builtins
+args
+kwargs
+init
+str
+int
+bool
+float
+dict
+list
+tuple
+set
+async
+await
+yield
+lambda
+isinstance
+builtins
+dataclass
+dataclasses
+env
+
+# Common programming abbreviations
+api
+cli
+gui
+tui
+url
+urls
+http
+https
+json
+csv
+xml
+yaml
+yml
+html
+css
+sql
+nosql
+regex
+utf
+ascii
+txt
+xlsx
+cmd
+req
+avg
+dev
+wip
+adr
+adrs
+inv
+ast
+ini
+cov
+cpu
+
+# Config and settings
+config
+configs
+entrypoint
+
+# Common terms
+utils
+util
+libs
+lib
+href
+div
+dist
+tech
+metadata
+dataset
+versa
+elif
+enum
+booleans
+timestamp
+validator
+validators
+allowlist
+blocklist
+wireframe
+yagni
+oop
+todo
+cyber
+nnnn
+yyyy
+
+# File and path terms
+filepath
+filepaths
+filename
+filenames
+dirpath
+dirname
+pathlib
+zipfile
+tempfile
+tmpdir
+
+# Code structure terms
+docstring
+docstrings
+subfolder
+subfolders
+subpackage
+subpackages
+subcommand
+subcommands
+submenu
+submenus
+
+# Common variable abbreviations
+tmp
+idx
+num
+attr
+attrs
+usr
+obj
+bak
+dirs
+est
+desc
+orig
+deps
+params
+lineno
+
+# Development terms
+refactor
+refactoring
+linting
+linter
+linters
+tdd
+mvp
+onboarding
+versioning
+lifecycle
+changelog
+changelogs
+roadmap
+gitignore
+gitignored
+
+# Build and config
+pyproject
+pipfile
+makefile
+dockerfile
+conftest
+
+# Testing terms
+pytest
+unittest
+mock
+mocking
+parseable
+unparseable
+
+# Common modules
+argparse
+subprocess
+traceback
+tokenize
+asyncio
+urllib
+etree
+
+# Code quality terms
+cyclomatic
+whitespace
+hardcode
+hardcoding
+hardcoded
+codebase
+
+# Data terms
+tuples
+frozenset
+validators
+lookup
+lookups
+csvs
+
+# Documentation terms
+pseudocode
+readme
+
+# Common tech abbreviations
+etc
+pre
+ctrl
+bot
+oss
+iso
+nlp
+
+# Networking
+tcp
+udp
+dns
+ssl
+tls
+ssh
+ftp
+smtp
+
+# Cloud/DevOps
+aws
+azure
+gcp
+docker
+kubernetes
+cicd
+
+# Web terms
+frontend
+backend
+fullstack
+api
+rest
+graphql
+
+# Common compound words
+multithreading
+multiprocessing
+workflow
+workflows
+matchup
+matchups
+backoff
+gameplay
+
+# Standards and orgs
+nist
+owasp
+sdlc
+
+# Other common tech terms
+architected
+cybersecurity
+mypy
+unix
+skipif
+xfail
+
+# Common contractions (apostrophe removed)
+isn
+aren
+wasn
+doesn
+didn
+wouldn
+couldn
+shouldn
+hasn
+haven
+won
+
+# Misc valid words often flagged
+searchable
+fieldnames
+starttag
+endtag
+setcode
+setcodes
+approvers
+unfound
+timestamped
+lowercased
+repo
+multi
+
+# Documentation terms
+postconditions
+preconditions
+docstring
+docstrings
+
+# Libraries
+pyspellchecker
+openpyxl
+spellcheck
+spellchecker
+
+# Analytics
+analytics
+setcodes
+approvers
+unfound

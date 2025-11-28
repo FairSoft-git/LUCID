@@ -1,6 +1,6 @@
 # LUCID Development Philosophy
 
-> **Project:** AT80  
+> **Author:** LUCID Repository  
 > **Version:** 1.1  
 > **Last Updated:** 2025-11-27  
 > **Status:** Active
@@ -466,7 +466,7 @@ Brief description of the issue, impact, and severity.
 
 ### Commit Standards
 - **Format:** `PROJECT.NNNN: <type>(<scope>): <subject>`
-  - `PROJECT`: Project code (e.g., AT80)
+  - `PROJECT`: Project code (e.g., PROJ, BL, WFE)
   - `NNNN`: Incrementing number (0001, 0002...)
   - `type`: feat, fix, docs, style, refactor, test, chore
 - **Length Limits:**
@@ -746,7 +746,7 @@ We explicitly **REJECT** the TOGAF (The Open Group Architecture Framework) model
 | :--- | :--- | :--- |
 | **Heavy Documentation** | **L - Lean** | TOGAF requires extensive artifacts (Architecture Definition Documents) which are "waste" in a Lean system. |
 | **Top-Down Design** | **U - User-First** | TOGAF defines architecture before implementation. LUCID lets the UI/User needs drive the architecture. |
-| **Enterprise Scope** | **D - Driven** | TOGAF is for coordinating departments. AT80 is a single application. |
+| **Enterprise Scope** | **D - Driven** | TOGAF is for coordinating departments. LUCID is for focused applications. |
 
 ### The LUCID Architecture Stack
 

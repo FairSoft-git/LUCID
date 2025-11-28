@@ -7,6 +7,16 @@ This file guides AI coding agents working in this repository.
 
 ---
 
+## ⚠️ CRITICAL: Creating New Projects
+
+When creating a new project, **ALWAYS** copy/clone the `LUCID_REPO/PROJECT_TEMPLATE` folder and rename it to the project name. Never create a project structure from scratch.
+
+```powershell
+Copy-Item -Path "C:\Users\laure\OneDrive\Documents\Code\LUCID_REPO\PROJECT_TEMPLATE" -Destination "C:\Users\laure\OneDrive\Documents\Code\NEW_PROJECT_NAME" -Recurse
+```
+
+---
+
 ## ⚠️ CRITICAL: Read Development Philosophy First
 
 Before writing ANY code, read: **`docs/development/LUCID/DEVELOPMENT_PHILOSOPHY.md`**
